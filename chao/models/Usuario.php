@@ -160,5 +160,47 @@ class Usuario {
         }
         return false;
     }
+
+    public function updateSaldo($monto) {
+        $query = "UPDATE " . $this->table_name . "
+                  SET saldo = saldo + :monto
+                  WHERE id_usuario = :id_usuario";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':monto', $monto);
+        $stmt->bindParam(':id_usuario', $this->id_usuario);
+
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+    }
+
+    public function readAll() {
+        $query = "SELECT * FROM " . $this->table_name . " ORDER BY fecha_registro DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function updateEstado() {
+        $query = "UPDATE " . $this->table_name . "
+                  SET estado = :estado
+                  WHERE id_usuario = :id_usuario";
+
+        $stmt = $this->conn->prepare($query);
+
+        $this->estado = htmlspecialchars(strip_tags($this->estado));
+        $this->id_usuario = htmlspecialchars(strip_tags($this->id_usuario));
+
+        $stmt->bindParam(':estado', $this->estado);
+        $stmt->bindParam(':id_usuario', $this->id_usuario);
+
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+    }
 }
 ?>

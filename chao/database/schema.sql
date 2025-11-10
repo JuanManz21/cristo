@@ -13,7 +13,8 @@ CREATE TABLE usuarios (
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tipo_usuario ENUM('cliente', 'admin') DEFAULT 'cliente',
     password_hash VARCHAR(255) NOT NULL,
-    estado ENUM('activo', 'inactivo') DEFAULT 'activo'
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    saldo DECIMAL(10, 2) DEFAULT 0.00
 );
 
 -- Emotional categories for products and support
