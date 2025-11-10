@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  <?php foreach ($cart_items_details as $item):
                     // This is inefficient but ok for a summary page
                     $producto_model->id_producto = $item['id_producto'];
-                    $producto_model->leerUno();
+                    $producto_model->readOne();
                 ?>
                 <div class="flex justify-between">
                     <span class="text-gray-600"><?php echo htmlspecialchars($producto_model->nombre); ?> x <?php echo $item['cantidad']; ?></span>
