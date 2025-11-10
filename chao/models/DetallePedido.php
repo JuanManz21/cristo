@@ -17,7 +17,7 @@ class DetallePedido {
 
     // Create order detail
     public function crear() {
-        $this->subtotal = $this.cantidad * $this.precio_unitario;
+        $this->subtotal = $this->cantidad * $this->precio_unitario;
 
         $query = "INSERT INTO " . $this->table_name . "
                   SET id_pedido=:id_pedido, id_producto=:id_producto,
