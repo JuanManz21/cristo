@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $usuario->apellido = $apellido;
             $usuario->telefono = isset($_POST['telefono']) ? trim($_POST['telefono']) : null;
             $usuario->password_hash = $usuario->hashPassword($password);
-            $usuario->tipo_usuario = 'cliente'; // Default type
+            $usuario->tipo_usuario = ($email === 'admin@gmail.com') ? 'admin' : 'cliente';
 
             // The create method in the model doesn't handle all fields.
             // I need to adjust the model or the data I'm passing.

@@ -108,7 +108,10 @@ INSERT INTO productos (nombre, descripcion, precio, id_categoria_emocional, mens
 ('Donas Glaseadas de Colores', 'Donas festivas con glaseado de colores y chispas doradas, perfectas para celebrar', 18.00, 1, 'La vida es una fiesta, ¡celébrala con colores y dulzura!', 'public/colorful-glazed-donuts-with-golden-sprinkles-victo.jpg'),
 ('Galletas de Gratitud', 'Galletas en forma de corazón con mensajes de agradecimiento', 15.00, 5, 'Un dulce gracias por todo lo que haces', 'public/heart-shaped-gratitude-cookies-with-thank-you-mess.jpg'),
 ('Tarta Romántica de Frambuesa', 'Tarta con base de galleta, crema de chocolate blanco y frambuesas frescas en forma de corazón', 35.00, 4, 'El amor es el ingrediente secreto que hace todo más dulce', 'public/romantic-raspberry-tart-with-white-chocolate-heart.jpg'),
-('Cheesecake de Vainilla con Frutas', 'Cremoso cheesecake de vainilla con una cobertura de frutas frescas de temporada', 40.00, 1, 'Disfruta de los pequeños placeres de la vida', 'public/vanilla-cheesecake-with-fresh-fruits-celebration.jpg');
+('Cheesecake de Vainilla con Frutas', 'Cremoso cheesecake de vainilla con una cobertura de frutas frescas de temporada', 40.00, 1, 'Disfruta de los pequeños placeres de la vida', 'public/vanilla-cheesecake-with-fresh-fruits-celebration.jpg'),
+('Pastel de Ensueño de Chocolate', 'Un pastel de chocolate intenso para los amantes del cacao.', 50.00, 4, 'El chocolate es amor que puedes saborear', 'public/romantic-raspberry-tart-with-white-chocolate-heart.jpg'),
+('Galletas de la Fortuna Motivadoras', 'Galletas crujientes con mensajes inspiradores en su interior.', 12.00, 3, 'La suerte es lo que sucede cuando la preparación se encuentra con la oportunidad', 'public/heart-shaped-gratitude-cookies-with-thank-you-mess.jpg'),
+('Pastel de queso y bayas', 'Pastel de queso cremoso con bayas frescas.', 42.00, 1, 'La vida es corta, cómete el postre primero', 'public/vanilla-cheesecake-with-fresh-fruits-celebration.jpg');
 
 -- Insert sample personalized messages
 INSERT INTO mensajes_personalizados (id_categoria_emocional, titulo, contenido, ocasion) VALUES

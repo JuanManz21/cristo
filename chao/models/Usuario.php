@@ -136,6 +136,7 @@ class Usuario {
             $this->tipo_usuario = $row['tipo_usuario'];
             $this->password_hash = $row['password_hash'];
             $this->estado = $row['estado'];
+            $this->saldo = $row['saldo'];
             return true;
         }
         return false;
