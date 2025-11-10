@@ -1,5 +1,34 @@
 <?php
 // This file is included from admin.php, so we have access to $conn
+
+// Handle cancel order action
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'cancel_order') {
+    $id_pedido_cancel = (int)$_POST['id_pedido'];
+    $id_usuario_cancel = (int)$_POST['id_usuario'];
+    $total_cancel = (float)$_POST['total'];
+
+    $conn->beginTransaction();
+    try {
+        // Update order status to 'cancelado'
+        $pedido_to_cancel = new Pedido($conn);
+        $pedido_to_cancel->id_pedido = $id_pedido_cancel;
+        $pedido_to_cancel->estado = 'cancelado';
+        $pedido_to_cancel->updateStatus();
+
+        // Refund the amount to the user's wallet
+        $user_to_refund = new Usuario($conn);
+        $user_to_refund->id_usuario = $id_usuario_cancel;
+        $user_to_refund->agregarSaldo($total_cancel);
+
+        $conn->commit();
+        $mensaje = "Pedido #" . $id_pedido_cancel . " ha sido cancelado y el monto ha sido devuelto.";
+
+    } catch (Exception $e) {
+        $conn->rollBack();
+        $error = "Error al cancelar el pedido: " . $e->getMessage();
+    }
+}
+
 $pedido_model = new Pedido($conn);
 $pedidos = $pedido_model->readAll();
 ?>
@@ -38,7 +67,17 @@ $pedidos = $pedido_model->readAll();
                     </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Ver</a>
+                    <?php if ($estado === 'aprobado'): ?>
+                        <form action="admin.php?seccion=pedidos" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas cancelar este pedido?');" class="inline">
+                            <input type="hidden" name="action" value="cancel_order">
+                            <input type="hidden" name="id_pedido" value="<?php echo $id_pedido; ?>">
+                            <input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
+                            <input type="hidden" name="total" value="<?php echo $total; ?>">
+                            <button type="submit" class="text-red-600 hover:text-red-900">Cancelar</button>
+                        </form>
+                    <?php else: ?>
+                        <span class="text-gray-400">N/A</span>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php endwhile; ?>
